@@ -1,0 +1,23 @@
+{
+  "name": "sea-battle",
+  "version": "0.1.0",
+  "author": "NMI",
+  "license": "MIT",
+  "workspaces": [
+    "frontend",
+    "bot",
+    "backend"
+  ],
+  "dependencies": {
+    "lerna": "^7.1.4"
+  },
+  "engines": {
+    "node": ">= 16.13.0"
+  },
+  "scripts": {
+    "dev": "lerna run dev",
+    "start": "lerna run start",
+    "build": "lerna run build"
+  },
+  "packageManager": "yarn@3.6.2"
+}
