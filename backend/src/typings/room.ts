@@ -1,5 +1,5 @@
 import { Room } from "colyseus"
-import { MyState } from "common"
+import { MyState } from "@typings/game"
 
 import onCreate from "@actions/onCreate"
 import onAuth from "@actions/onAuth"

@@ -1,4 +1,4 @@
-import { IUser, User } from "common/database"
+import { IUser, User } from "@database/user"
 import { UpdateQuery, UpdateWithAggregationPipeline } from "mongoose"
 
 export async function updateUser(

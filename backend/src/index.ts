@@ -7,11 +7,15 @@ import { uWebSocketsTransport } from "@colyseus/uwebsockets-transport"
 import { RedisDriver } from "colyseus"
 
 import { MyRoom } from "@typings/room"
+import { getUserInfo } from "@actions/getUserInfo"
 
 const transport = new uWebSocketsTransport({
   idleTimeout: 60,
   sendPingsAutomatically: true
 })
+
+transport.app.get("/userinfo/:id", getUserInfo)
+
 const gameServer = new Server({
   driver: new RedisDriver({
     host: config.REDIS_HOST,
