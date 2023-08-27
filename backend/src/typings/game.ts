@@ -12,6 +12,7 @@ export type GameEvents = (typeof gameEventsArray)[number]
 
 export const gameErrorsArray = [
   "alreadyStarted",
+  "alreadyPlaced",
   "notYourMove",
   "notAllowed"
 ] as const

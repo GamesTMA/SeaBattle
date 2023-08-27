@@ -1,6 +1,5 @@
 import { ArraySchema, filter, Schema, type } from "@colyseus/schema"
 import { Client } from "colyseus"
-import { isArrayEqual } from "@utils/isArrayEqual"
 import { MyState } from "@typings/game"
 
 export type PlayerStatus = "online" | "offline" | "afk"
@@ -13,15 +12,46 @@ export class PlayerClass extends Schema {
 
 export type Player = InstanceType<typeof PlayerClass>
 
-export type ShipsType = [0, 1, 2, 3, 4]
+export const Ships = [0, 1, 2, 3, 4]
+export type ShipsTypeTypes = (typeof Ships)[number]
 
 export class BattleMapClass extends Schema {
   @type("number") x: number
   @type("number") y: number
-  @type("number") ship: ShipsType
-  @type("boolean") hit: boolean
-  @type("boolean") sunk: boolean
-  @type("boolean") miss: boolean
+
+  @filter(function (
+    client: Client<Player>,
+    value: ShipsTypeTypes,
+    root: MyState
+  ) {
+    console.log(value, client.userData, root.players.toJSON())
+
+    return true
+  })
+  @type("number")
+  ship?: ShipsTypeTypes
+
+  @type("boolean") hit?: boolean
+  @type("boolean") sunk?: boolean
+  @type("boolean") miss?: boolean
+
+  constructor(
+    x: number,
+    y: number,
+    ship?: ShipsTypeTypes,
+    hit?: boolean,
+    sunk?: boolean,
+    miss?: boolean
+  ) {
+    super()
+
+    this.x = x
+    this.y = y
+    this.ship = ship
+    this.hit = hit
+    this.sunk = sunk
+    this.miss = miss
+  }
 }
 
 export class PlayerDataClass extends Schema {
@@ -31,19 +61,7 @@ export class PlayerDataClass extends Schema {
 
   @type("boolean") isShipsPlaced: boolean
 
-  @filter(function (
-    client: Client<Player>,
-    value: ArraySchema<BattleMapClass>,
-    root: MyState
-  ) {
-    const player = root.players.get(String(client.userData?.id))
-
-    if (!player || typeof player.map === "undefined") return false
-
-    return isArrayEqual(player.map, value)
-  })
-  @type([BattleMapClass])
-  map = new ArraySchema<BattleMapClass>()
+  @type([BattleMapClass]) map = new ArraySchema<BattleMapClass>()
 }
 
 export interface ConnectOptions {

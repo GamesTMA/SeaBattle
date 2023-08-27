@@ -1,9 +1,9 @@
-import {MyRoom} from "@typings/room"
-import {MessageInput} from "@typings/socket";
-import {Player, PlayerDataClass} from "@typings/player";
-import {Client} from "colyseus";
-import {ArraySchema} from "@colyseus/schema";
-import {startGame} from "@helpers/startGame";
+import { MyRoom } from "@typings/room"
+import { MessageInput } from "@typings/socket"
+import { BattleMapClass, Player, PlayerDataClass } from "@typings/player"
+import { Client } from "colyseus"
+import { ArraySchema } from "@colyseus/schema"
+import { startGame } from "@helpers/startGame"
 
 export default function onJoin(this: MyRoom, client: Client<Player>) {
   if (this.state.status === "playing")
@@ -16,11 +16,15 @@ export default function onJoin(this: MyRoom, client: Client<Player>) {
   player.info.name = client.userData.name
   player.info.language = client.userData.language
   player.status = "online"
+  player.isShipsPlaced = false
 
-  const startMap = Array.from(Array(100), _ => 'null')
-  player.map = new ArraySchema<string>(
-    ...startMap
-  )
+  const startMap = Array.from({ length: 100 }, (_, i) => {
+    const x = i % 10
+    const y = Math.floor(i / 10)
+
+    return new BattleMapClass(x, y, 0)
+  })
+  player.map = new ArraySchema<BattleMapClass>(...startMap)
 
   this.state.players.set(String(client.userData.id), player)
 
