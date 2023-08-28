@@ -1,9 +1,9 @@
 import { GameErrors, GameEvents } from "./game"
-import { PlayerDataClass } from "@typings/player"
+import { ShipsClass } from "@typings/player"
 
 export type MessageInit = {
   type: GameEvents
-  positions: PlayerDataClass["map"]
+  ship: ShipsClass
 }
 
 export type MessageInput = {

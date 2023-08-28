@@ -1,6 +1,7 @@
 import { ArraySchema, filter, Schema, type } from "@colyseus/schema"
 import { Client } from "colyseus"
 import { MyState } from "@typings/game"
+import { isArrayEqual } from "@utils/isArrayEqual"
 
 export type PlayerStatus = "online" | "offline" | "afk"
 
@@ -12,45 +13,56 @@ export class PlayerClass extends Schema {
 
 export type Player = InstanceType<typeof PlayerClass>
 
-export const Ships = [0, 1, 2, 3, 4]
-export type ShipsTypeTypes = (typeof Ships)[number]
-
 export class BattleMapClass extends Schema {
   @type("number") x: number
   @type("number") y: number
-
-  @filter(function (
-    client: Client<Player>,
-    value: ShipsTypeTypes,
-    root: MyState
-  ) {
-    console.log(value, client.userData, root.players.toJSON())
-
-    return true
-  })
-  @type("number")
-  ship?: ShipsTypeTypes
-
   @type("boolean") hit?: boolean
-  @type("boolean") sunk?: boolean
   @type("boolean") miss?: boolean
-
+  @type("boolean") marked?: boolean
   constructor(
     x: number,
     y: number,
-    ship?: ShipsTypeTypes,
-    hit?: boolean,
-    sunk?: boolean,
-    miss?: boolean
+    hit: boolean = false,
+    miss: boolean = false,
+    marked: boolean = false
   ) {
     super()
 
     this.x = x
     this.y = y
-    this.ship = ship
+    this.hit = hit
+    this.miss = miss
+    this.marked = marked
+  }
+}
+
+export type ShipDirection = "right" | "down"
+
+export class ShipsClass extends Schema {
+  @type("number") x: number
+  @type("number") y: number
+
+  @type("number") length: number
+  @type("string") direction: ShipDirection
+  @type("boolean") hit: boolean
+  @type("boolean") sunk: boolean
+
+  constructor(
+    x: number,
+    y: number,
+    length: number,
+    direction: ShipDirection,
+    hit: boolean = false,
+    sunk: boolean = false
+  ) {
+    super()
+
+    this.x = x
+    this.y = y
+    this.length = length
+    this.direction = direction
     this.hit = hit
     this.sunk = sunk
-    this.miss = miss
   }
 }
 
@@ -61,10 +73,25 @@ export class PlayerDataClass extends Schema {
 
   @type("boolean") isShipsPlaced: boolean
 
-  @type([BattleMapClass]) map = new ArraySchema<BattleMapClass>()
+  @type([BattleMapClass]) battleMap = new ArraySchema<BattleMapClass>()
+
+  @filter(fu;[ShipsClass])
+  @type(;  ships = new ArraySchema<ShipsClass>())
+
+nction(
+    client: Client<Player>,
+    value: ShipsClass[],
+    root: MyState
+  ) {
+    const player = root.players.get(String(client.userData?.id))
+
+    if (!pla;yer || typeof player.ships === "undefined") return false
+
+    return i;sArrayEqual(player.ships, value)
+  }
 }
 
-export interface ConnectOptions {
+export int;erface ConnectOptions {
   player: {
     id: number
     name: string

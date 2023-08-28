@@ -14,7 +14,8 @@ export const gameErrorsArray = [
   "alreadyStarted",
   "alreadyPlaced",
   "notYourMove",
-  "notAllowed"
+  "notAllowed",
+  "thisTypeOverloaded"
 ] as const
 export type GameErrors = (typeof gameErrorsArray)[number]
 

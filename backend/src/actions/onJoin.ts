@@ -22,10 +22,9 @@ export default function onJoin(this: MyRoom, client: Client<Player>) {
     const x = i % 10
     const y = Math.floor(i / 10)
 
-    return new BattleMapClass(x, y, 0)
+    return new BattleMapClass(x, y)
   })
-  player.map = new ArraySchema<BattleMapClass>(...startMap)
-
+  player.battleMap = new ArraySchema<BattleMapClass>(...startMap)
   this.state.players.set(String(client.userData.id), player)
 
   if (this.state.players.size === 2) void startGame(this)
