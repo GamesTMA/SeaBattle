@@ -1,5 +1,5 @@
 import { useSearchParams } from "@solidjs/router"
-import { createEffect, createSignal } from "solid-js"
+import { createSignal, onCleanup, onMount } from "solid-js"
 import { MyState } from "backend/src/typings/game"
 import { Room } from "colyseus.js"
 import { BattleMap } from "~/components/map"
@@ -12,8 +12,19 @@ export default function Home() {
   const [room, setRoom] = createSignal<Room<MyState>>({} as Room<MyState>)
   const [gameId, setGameId] = createSignal(searchParams.tgWebAppStartParam)
 
-  createEffect(() => {})
-
+  const [size, setSize] = createSignal(0)
+  const handlerSize = () => {
+    setSize(
+      window.innerWidth * 0.9 > (window.innerHeight * 0.9) / 2
+        ? (window.innerHeight * 0.9) / 2
+        : window.innerWidth * 0.9
+    )
+  }
+  onMount(() => {
+    handlerSize()
+    window.addEventListener("resize", handlerSize)
+  })
+  onCleanup(() => window.removeEventListener("resize", handlerSize))
   const battleMap = [
     { x: 0, y: 0, miss: true },
     { x: 1, y: 0, hit: true },
@@ -28,7 +39,7 @@ export default function Home() {
 
   return (
     <main>
-      <BattleMap battleMap={battleMap} ships={ships} />
+      <BattleMap size={size} battleMap={battleMap} ships={ships} />
     </main>
   )
 }

@@ -19,6 +19,7 @@ export class BattleMapClass extends Schema {
   @type("boolean") hit?: boolean
   @type("boolean") miss?: boolean
   @type("boolean") marked?: boolean
+
   constructor(
     x: number,
     y: number,
@@ -75,23 +76,23 @@ export class PlayerDataClass extends Schema {
 
   @type([BattleMapClass]) battleMap = new ArraySchema<BattleMapClass>()
 
-  @filter(fu;[ShipsClass])
-  @type(;  ships = new ArraySchema<ShipsClass>())
-
-nction(
+  @filter(function (
     client: Client<Player>,
     value: ShipsClass[],
     root: MyState
   ) {
     const player = root.players.get(String(client.userData?.id))
 
-    if (!pla;yer || typeof player.ships === "undefined") return false
+    if (!player || typeof player.ships === "undefined") return fals
+    e
 
-    return i;sArrayEqual(player.ships, value)
-  }
+    return isArrayEqual(player.ships, va;lue)
+  })
+  @type([ShipsClass])
+  ships = new ArraySchema<ShipsClass>()
 }
 
-export int;erface ConnectOptions {
+export interface ConnectOptions {
   player: {
     id: number
     name: string
