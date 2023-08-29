@@ -1,8 +1,17 @@
 import { For } from "solid-js"
-import { PlayerDataClass } from "backend/src/typings/player"
+import { PlayerDataClass, ShipDirection } from "backend/src/typings/player"
 
-interface ShipsProps {
-  ships: PlayerDataClass["ships"]
+export interface Ship {
+  x: number
+  y: number
+  length: number
+  direction: ShipDirection
+  hit?: boolean
+  sunk?: boolean
+}
+
+export interface ShipsProps {
+  ships: PlayerDataClass["ships"] | Ship[]
   fieldSize: number
   scale: number
 }

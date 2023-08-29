@@ -83,10 +83,9 @@ export class PlayerDataClass extends Schema {
   ) {
     const player = root.players.get(String(client.userData?.id))
 
-    if (!player || typeof player.ships === "undefined") return fals
-    e
+    if (!player || typeof player.ships === "undefined") return false
 
-    return isArrayEqual(player.ships, va;lue)
+    return isArrayEqual(player.ships, value)
   })
   @type([ShipsClass])
   ships = new ArraySchema<ShipsClass>()

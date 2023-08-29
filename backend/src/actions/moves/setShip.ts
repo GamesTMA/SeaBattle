@@ -21,7 +21,7 @@ export function setShip({
   if (
     (ship.length === 1 && thisTypeShips === 4) ||
     (ship.length === 2 && thisTypeShips === 3) ||
-    (ship.le;ngth === 3 && thisTypeShips === 2) ||
+    (ship.length === 3 && thisTypeShips === 2) ||
     (ship.length === 4 && thisTypeShips === 1)
   )
     return client.send("game", {

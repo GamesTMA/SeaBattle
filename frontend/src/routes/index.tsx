@@ -4,6 +4,8 @@ import { MyState } from "backend/src/typings/game"
 import { Room } from "colyseus.js"
 import { BattleMap } from "~/components/map"
 import { Game } from "~/typings/Game"
+import { Parking } from "~/components/parking"
+import { ShipsProps } from "~/components/ships"
 
 export default function Home() {
   const [searchParams, setSearchParams] = useSearchParams()
@@ -30,16 +32,14 @@ export default function Home() {
     { x: 1, y: 0, hit: true },
     { x: 2, y: 0, marked: true }
   ]
-
   const ships = [
-    { x: 0, y: 0, length: 1, direction: "right" },
-    { x: 3, y: 0, length: 2, direction: "bottom" },
-    { x: 5, y: 0, length: 3, direction: "right" }
-  ]
+    { x: 0, y: 0, length: 2, direction: "right" }
+  ] as ShipsProps["ships"]
 
   return (
     <main>
       <BattleMap size={size} battleMap={battleMap} ships={ships} />
+      <Parking size={size} ships={ships} />
     </main>
   )
 }

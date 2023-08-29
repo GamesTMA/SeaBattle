@@ -1,13 +1,13 @@
 import { Accessor, createEffect, createSignal } from "solid-js"
 import { Tags } from "~/components/map/tags"
-import { Ships } from "~/components/map/ships"
+import { Ships, ShipsProps } from "~/components/ships"
 import { PlayerDataClass } from "backend/src/typings/player"
 
 const defaultFieldSize = 33
 
 interface BattleMapProps {
   battleMap: PlayerDataClass["battleMap"]
-  ships: PlayerDataClass["ships"]
+  ships: ShipsProps["ships"]
   size: Accessor<number>
 }
 
