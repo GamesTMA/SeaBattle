@@ -44,7 +44,7 @@ export function Ships(props: ShipsProps) {
               left: `${(item.x + 1) * props.fieldSize}px`,
               top: `${(item.y + 1) * props.fieldSize}px`,
               transform:
-                item.direction === "bottom"
+                item.direction === "vertical"
                   ? "rotate(-90deg) translate(-25%, -50%)"
                   : ""
             }}

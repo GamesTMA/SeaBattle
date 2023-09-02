@@ -37,7 +37,7 @@ export class BattleMapClass extends Schema {
   }
 }
 
-export type ShipDirection = "right" | "down"
+export type ShipDirection = "horizontal" | "vertical"
 
 export class ShipsClass extends Schema {
   @type("number") x: number
@@ -71,8 +71,6 @@ export class PlayerDataClass extends Schema {
   @type(PlayerClass) info = new PlayerClass()
 
   @type("string") status: PlayerStatus
-
-  @type("boolean") isShipsPlaced: boolean
 
   @type([BattleMapClass]) battleMap = new ArraySchema<BattleMapClass>()
 

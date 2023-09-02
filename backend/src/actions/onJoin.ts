@@ -16,7 +16,6 @@ export default function onJoin(this: MyRoom, client: Client<Player>) {
   player.info.name = client.userData.name
   player.info.language = client.userData.language
   player.status = "online"
-  player.isShipsPlaced = false
 
   const startMap = Array.from({ length: 100 }, (_, i) => {
     const x = i % 10

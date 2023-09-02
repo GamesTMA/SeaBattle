@@ -4,7 +4,9 @@ import { PlayerDataClass } from "@typings/player"
 
 export const gameEventsArray = [
   "gameEnded",
+  "setShipsRandom",
   "makeFire",
+  "deleteShip",
   "setShip",
   "unknownAction"
 ] as const
@@ -12,10 +14,11 @@ export type GameEvents = (typeof gameEventsArray)[number]
 
 export const gameErrorsArray = [
   "alreadyStarted",
-  "alreadyPlaced",
+  "notStarted",
   "notYourMove",
   "notAllowed",
-  "thisTypeOverloaded"
+  "thisTypeOverloaded",
+  "collisionMatched"
 ] as const
 export type GameErrors = (typeof gameErrorsArray)[number]
 

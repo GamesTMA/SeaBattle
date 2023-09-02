@@ -3,7 +3,7 @@ import { MyRoom } from "@typings/room"
 import { isGameEvent } from "@typings/game"
 import { Player, PlayerDataClass } from "@typings/player"
 import { MessageInit } from "@typings/socket"
-import { makeFire, setShip } from "@actions/moves"
+import { deleteShip, makeFire, setShip, setShipsRandom } from "@actions/moves"
 
 export interface MoveContext {
   client: Client<Player>
@@ -36,6 +36,10 @@ export default function onMessage(
   switch (message.type) {
     case "setShip":
       return setShip(context)
+    case "setShipsRandom":
+      return setShipsRandom(context)
+    case "deleteShip":
+      return deleteShip(context)
     case "makeFire":
       return makeFire(context)
     default:

@@ -1,6 +1,7 @@
 import { MoveContext } from "@actions/onMessage"
 import { MessageInput } from "@typings/socket"
 import { startGame } from "@helpers/startGame"
+import { checkCollision } from "@utils/checkCollision"
 
 export function setShip({
   client,
@@ -8,9 +9,9 @@ export function setShip({
   player,
   room
 }: MoveContext) {
-  if (player.isShipsPlaced)
+  if (room.state.status === "playing")
     return client.send("game", {
-      type: "alreadyPlaced"
+      type: "alreadyStarted"
     } as MessageInput)
 
   const thisTypeShips = player.ships.reduce(
@@ -28,7 +29,12 @@ export function setShip({
       type: "thisTypeOverloaded"
     } as MessageInput)
 
+  if (checkCollision(ship, player.ships))
+    return client.send("game", {
+      type: "collisionMatched"
+    } as MessageInput)
+
   player.ships.push(ship)
 
-  if (player.ships.length === 10) return startGame(room)
+  return startGame(room)
 }
