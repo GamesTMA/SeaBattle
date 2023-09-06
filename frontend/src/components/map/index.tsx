@@ -5,10 +5,11 @@ import { PlayerDataClass } from "backend/src/typings/player"
 
 const defaultFieldSize = 33
 
-interface BattleMapProps {
+export interface BattleMapProps {
   battleMap: PlayerDataClass["battleMap"]
   ships: ShipsProps["ships"]
   size: Accessor<number>
+  droppable: boolean
 }
 
 export function BattleMap(props: BattleMapProps) {
@@ -55,8 +56,14 @@ export function BattleMap(props: BattleMapProps) {
         battleMap={props.battleMap}
         fieldSize={fieldSize()}
         scale={scale()}
+        droppable={props.droppable}
       />
-      <Ships ships={props.ships} fieldSize={fieldSize()} scale={scale()} />
+      <Ships
+        ships={props.ships}
+        fieldSize={fieldSize()}
+        scale={scale()}
+        draggable={false}
+      />
     </figure>
   )
 }

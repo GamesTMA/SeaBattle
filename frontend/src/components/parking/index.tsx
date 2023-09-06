@@ -10,21 +10,21 @@ interface ParkingProps {
 }
 
 const ships = [
-  [{ y: 0, x: 0, length: 4, direction: "right" }],
+  [{ y: 0, x: 0, length: 4, direction: "horizontal" }],
   [
-    { y: 2, x: 0, length: 3, direction: "right" },
-    { y: 2, x: 4, length: 3, direction: "right" }
+    { y: 2, x: 0, length: 3, direction: "horizontal" },
+    { y: 2, x: 4, length: 3, direction: "horizontal" }
   ],
   [
-    { y: 4, x: 0, length: 2, direction: "right" },
-    { y: 4, x: 3, length: 2, direction: "right" },
-    { y: 4, x: 6, length: 2, direction: "right" }
+    { y: 4, x: 0, length: 2, direction: "horizontal" },
+    { y: 4, x: 3, length: 2, direction: "horizontal" },
+    { y: 4, x: 6, length: 2, direction: "horizontal" }
   ],
   [
-    { y: 6, x: 0, length: 1, direction: "right" },
-    { y: 6, x: 2, length: 1, direction: "right" },
-    { y: 6, x: 4, length: 1, direction: "right" },
-    { y: 6, x: 6, length: 1, direction: "right" }
+    { y: 6, x: 0, length: 1, direction: "horizontal" },
+    { y: 6, x: 2, length: 1, direction: "horizontal" },
+    { y: 6, x: 4, length: 1, direction: "horizontal" },
+    { y: 6, x: 6, length: 1, direction: "horizontal" }
   ]
 ] as ShipsProps["ships"][]
 
@@ -52,9 +52,10 @@ export function Parking(props: ParkingProps) {
       .flat() as ShipsProps["ships"]
 
   const [parkedShips, setParkedShips] = createSignal<ShipsProps["ships"]>(
-    {} as ShipsProps["ships"]
+    [] as ShipsProps["ships"]
   )
   createEffect(() => setParkedShips(parkShips()))
+
   return (
     <figure
       style={{
@@ -65,7 +66,12 @@ export function Parking(props: ParkingProps) {
         "margin-right": "auto"
       }}
     >
-      <Ships ships={parkedShips()} fieldSize={fieldSize()} scale={scale()} />
+      <Ships
+        ships={parkedShips()}
+        fieldSize={fieldSize()}
+        scale={scale()}
+        draggable
+      />
     </figure>
   )
 }

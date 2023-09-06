@@ -2,10 +2,10 @@ import { useSearchParams } from "@solidjs/router"
 import { createSignal, onCleanup, onMount } from "solid-js"
 import { MyState } from "backend/src/typings/game"
 import { Room } from "colyseus.js"
-import { BattleMap } from "~/components/map"
 import { Game } from "~/typings/Game"
-import { Parking } from "~/components/parking"
 import { ShipsProps } from "~/components/ships"
+import { NotStarted } from "~/components/NotStarted"
+import { BattleMapProps } from "~/components/map"
 
 export default function Home() {
   const [searchParams, setSearchParams] = useSearchParams()
@@ -31,15 +31,14 @@ export default function Home() {
     { x: 0, y: 0, miss: true },
     { x: 1, y: 0, hit: true },
     { x: 2, y: 0, marked: true }
-  ]
+  ] as unknown as BattleMapProps["battleMap"]
   const ships = [
-    { x: 0, y: 0, length: 2, direction: "right" }
+    { x: 0, y: 0, length: 2, direction: "horizontal" }
   ] as ShipsProps["ships"]
 
   return (
     <main>
-      <BattleMap size={size} battleMap={battleMap} ships={ships} />
-      <Parking size={size} ships={ships} />
+      <NotStarted size={size} battleMap={battleMap} ships={ships} />
     </main>
   )
 }
