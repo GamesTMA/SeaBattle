@@ -3,14 +3,15 @@ import { Tag } from "~/components/map/tags/tag"
 import { Droppable } from "~/components/map/tags/droppable"
 import { DimensionContext } from "~/contexts/Dimension"
 
-interface TagsProps {
+export interface TagsProps {
   battleMap: Tag[]
   droppable: boolean
 }
 
 export function Tags(props: TagsProps) {
   const { fieldSize } = useContext(DimensionContext)
-  const [battleMap, setBattleMap] = createSignal([] as Tag[])
+  const [battleMap, setBattleMap] = createSignal([] as TagsProps["battleMap"])
+
   createEffect(() => {
     if (fieldSize())
       setBattleMap(
@@ -26,6 +27,7 @@ export function Tags(props: TagsProps) {
         }))
       )
   })
+
   return (
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     // @ts-ignore

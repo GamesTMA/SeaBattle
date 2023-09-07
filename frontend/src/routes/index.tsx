@@ -5,8 +5,8 @@ import { Room } from "colyseus.js"
 import { Game } from "~/typings/Game"
 import { ShipsProps } from "~/components/ships"
 import { NotStarted } from "~/components/NotStarted"
-import { BattleMapProps } from "~/components/map"
 import { DimensionProvider } from "~/contexts/Dimension"
+import { TagsProps } from "~/components/map/tags"
 
 export default function Home() {
   const [searchParams, setSearchParams] = useSearchParams()
@@ -26,7 +26,7 @@ export default function Home() {
     { x: 7, y: 7 },
     { x: 8, y: 8 },
     { x: 9, y: 9 }
-  ] as unknown as BattleMapProps["battleMap"]
+  ] as TagsProps["battleMap"]
   const ships = [
     { x: 0, y: 0, length: 2, direction: "horizontal" }
   ] as ShipsProps["ships"]

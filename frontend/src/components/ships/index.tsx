@@ -10,7 +10,7 @@ export interface ShipsProps {
 
 export function Ships(props: ShipsProps) {
   const { fieldSize } = useContext(DimensionContext)
-  const [ships, setShips] = createSignal([] as Ship[])
+  const [ships, setShips] = createSignal([] as ShipsProps["ships"])
 
   createEffect(() => {
     if (fieldSize())

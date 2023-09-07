@@ -1,11 +1,10 @@
 import { useContext } from "solid-js"
-import { Tags } from "~/components/map/tags"
+import { Tags, TagsProps } from "~/components/map/tags"
 import { Ships, ShipsProps } from "~/components/ships"
-import { PlayerDataClass } from "backend/src/typings/player"
 import { DimensionContext } from "~/contexts/Dimension"
 
 export interface BattleMapProps {
-  battleMap: PlayerDataClass["battleMap"]
+  battleMap: TagsProps["battleMap"]
   ships: ShipsProps["ships"]
   droppable: boolean
 }

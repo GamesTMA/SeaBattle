@@ -6,10 +6,10 @@ import {
 import { BattleMap } from "~/components/map"
 import { Parking } from "~/components/parking"
 import { ShipsProps } from "~/components/ships"
-import { PlayerDataClass } from "backend/src/typings/player"
+import { TagsProps } from "~/components/map/tags"
 
 export interface DragDropProps {
-  battleMap: PlayerDataClass["battleMap"]
+  battleMap: TagsProps["battleMap"]
   ships: ShipsProps["ships"]
 }
 

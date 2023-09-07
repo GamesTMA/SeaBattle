@@ -2,9 +2,10 @@ import { createEffect, createSignal, useContext } from "solid-js"
 import { Ships, ShipsProps } from "~/components/ships"
 import { ShipsClass } from "backend/src/typings/player"
 import { Ship } from "~/components/ships/ship"
-i;mport { DimensionContext } from "~/contexts/Dimension"
+import { DimensionContext } from "~/contexts/Dimension"
+import { RandomButton } from "~/components/parking/randomButton"
 
-;interface ParkingProps {
+interface ParkingProps {
   ships: ShipsProps["ships"]
 }
 
@@ -28,7 +29,7 @@ const ships = [
 ] as ShipsProps["ships"][]
 
 export function Parking(props: ParkingProps) {
-  const { fieldSize, size } = useContext(DimensionContext);
+  const { fieldSize, size } = useContext(DimensionContext)
 
   const parkShips = () =>
     ships
@@ -59,6 +60,7 @@ export function Parking(props: ParkingProps) {
         "margin-right": "auto"
       }}
     >
+      <RandomButton />
       <Ships ships={parkedShips()} draggable />
     </figure>
   )

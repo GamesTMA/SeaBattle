@@ -1,7 +1,7 @@
 import { createDraggable } from "@thisbeyond/solid-dnd"
 import { JSX, JSXElement } from "solid-js"
 
-export interface DraggableProps {
+interface DraggableProps {
   id: string
   children: JSXElement
   style?: JSX.CSSProperties
