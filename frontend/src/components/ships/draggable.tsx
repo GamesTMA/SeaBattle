@@ -1,9 +1,10 @@
 import { createDraggable } from "@thisbeyond/solid-dnd"
-import { JSXElement } from "solid-js"
+import { JSX, JSXElement } from "solid-js"
 
 export interface DraggableProps {
   id: string
   children: JSXElement
+  style?: JSX.CSSProperties
 }
 
 export function Draggable(props: DraggableProps) {
@@ -12,7 +13,7 @@ export function Draggable(props: DraggableProps) {
   return (
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     // @ts-ignore
-    <div use:draggable class="draggable">
+    <div use:draggable class="draggable" style={props.style}>
       {props.children}
     </div>
   )

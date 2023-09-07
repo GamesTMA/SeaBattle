@@ -1,5 +1,7 @@
 import { ShipsProps } from "~/components/ships/index"
 import { ShipDirection } from "backend/src/typings/player"
+import { JSX, useContext } from "solid-js"
+import { DimensionContext } from "~/contexts/Dimension"
 
 export interface Ship {
   x: number
@@ -8,6 +10,7 @@ export interface Ship {
   direction: ShipDirection
   hit?: boolean
   sunk?: boolean
+  style?: JSX.CSSProperties
 }
 
 export interface ShipProps {
@@ -17,24 +20,17 @@ export interface ShipProps {
 }
 
 export function ShipComponent(props: ShipProps) {
+  const { scale } = useContext(DimensionContext)
+
   return (
     <div
       style={{
         "background-image": `url('/sprite.png')`,
-        "background-position": `${props.shift * -props.ships.scale}px ${0}px`,
-        "background-size": `${props.ships.scale * 396}px ${
-          props.ships.scale * 99
-        }px`,
+        "background-position": `${props.shift * -scale()}px ${0}px`,
+        "background-size": `${scale() * 396}px ${scale() * 99}px`,
         "background-repeat": "no-repeat",
-        width: `${props.ships.fieldSize * props.item.length}px`,
-        height: `${props.ships.fieldSize}px`,
-        position: "absolute",
-        left: `${(props.item.x + 1) * props.ships.fieldSize}px`,
-        top: `${(props.item.y + 1) * props.ships.fieldSize}px`,
-        transform:
-          props.item.direction === "vertical"
-            ? "rotate(-90deg) translate(-25%, -50%)"
-            : ""
+        width: "100%",
+        height: "100%"
       }}
     />
   )

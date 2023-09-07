@@ -1,12 +1,11 @@
-import { Accessor, createEffect, createSignal } from "solid-js"
-import { Ship, Ships, ShipsProps } from "~/components/ships"
+import { createEffect, createSignal, useContext } from "solid-js"
+import { Ships, ShipsProps } from "~/components/ships"
 import { ShipsClass } from "backend/src/typings/player"
+import { Ship } from "~/components/ships/ship"
+i;mport { DimensionContext } from "~/contexts/Dimension"
 
-const defaultFieldSize = 33
-
-interface ParkingProps {
+;interface ParkingProps {
   ships: ShipsProps["ships"]
-  size: Accessor<number>
 }
 
 const ships = [
@@ -29,13 +28,7 @@ const ships = [
 ] as ShipsProps["ships"][]
 
 export function Parking(props: ParkingProps) {
-  const [fieldSize, setFieldSize] = createSignal(defaultFieldSize)
-  const [scale, setScale] = createSignal(1)
-
-  createEffect(() => {
-    setFieldSize(props.size() / 11)
-    setScale(fieldSize() / defaultFieldSize)
-  })
+  const { fieldSize, size } = useContext(DimensionContext);
 
   const parkShips = () =>
     ships
@@ -59,19 +52,14 @@ export function Parking(props: ParkingProps) {
   return (
     <figure
       style={{
-        width: `${props.size() + fieldSize()}px`,
-        height: `${props.size() + fieldSize()}px`,
+        width: `${size() + fieldSize()}px`,
+        height: `${size() + fieldSize()}px`,
         position: "relative",
         "margin-left": "auto",
         "margin-right": "auto"
       }}
     >
-      <Ships
-        ships={parkedShips()}
-        fieldSize={fieldSize()}
-        scale={scale()}
-        draggable
-      />
+      <Ships ships={parkedShips()} draggable />
     </figure>
   )
 }
