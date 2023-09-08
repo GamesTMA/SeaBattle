@@ -1,20 +1,9 @@
-import { useSearchParams } from "@solidjs/router"
-import { createSignal } from "solid-js"
-import { MyState } from "backend/src/typings/game"
-import { Room } from "colyseus.js"
-import { Game } from "~/typings/Game"
 import { ShipsProps } from "~/components/ships"
 import { NotStarted } from "~/components/NotStarted"
 import { DimensionProvider } from "~/contexts/Dimension"
 import { TagsProps } from "~/components/map/tags"
 
 export default function Home() {
-  const [searchParams, setSearchParams] = useSearchParams()
-
-  const [game, setGame] = createSignal<Game>({} as Game)
-  const [room, setRoom] = createSignal<Room<MyState>>({} as Room<MyState>)
-  const [gameId, setGameId] = createSignal(searchParams.tgWebAppStartParam)
-
   const battleMap = [
     { x: 0, y: 0 },
     { x: 1, y: 1 },

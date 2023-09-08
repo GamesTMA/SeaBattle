@@ -12,6 +12,9 @@ import {
   Title
 } from "solid-start"
 import "./root.css"
+import { SDKProvider } from "@twa.js/sdk-solid"
+import { DisplayGate } from "~/contexts/TWA"
+import { GameProvider } from "~/contexts/Game"
 
 export default function Root() {
   return (
@@ -22,13 +25,19 @@ export default function Root() {
         <Meta name="viewport" content="width=device-width, initial-scale=1" />
       </Head>
       <Body>
-        <Suspense>
-          <ErrorBoundary>
-            <Routes>
-              <FileRoutes />
-            </Routes>
-          </ErrorBoundary>
-        </Suspense>
+        <SDKProvider initOptions={{ debug: true, cssVars: true }}>
+          <DisplayGate>
+            <GameProvider>
+              <Suspense>
+                <ErrorBoundary>
+                  <Routes>
+                    <FileRoutes />
+                  </Routes>
+                </ErrorBoundary>
+              </Suspense>
+            </GameProvider>
+          </DisplayGate>
+        </SDKProvider>
         <Scripts />
       </Body>
     </Html>

@@ -3,9 +3,9 @@ import {
   createContext,
   createEffect,
   createSignal,
-  JSXElement,
   onCleanup,
-  onMount
+  onMount,
+  ParentProps
 } from "solid-js"
 
 const defaultFieldSize = 33
@@ -18,11 +18,7 @@ interface DimensionContextProps {
 
 export const DimensionContext = createContext({} as DimensionContextProps)
 
-interface DimensionProps {
-  children: JSXElement
-}
-
-export function DimensionProvider(props: DimensionProps) {
+export function DimensionProvider(props: ParentProps) {
   const [size, setSize] = createSignal(0)
   const [fieldSize, setFieldSize] = createSignal(defaultFieldSize)
   const [scale, setScale] = createSignal(1)
