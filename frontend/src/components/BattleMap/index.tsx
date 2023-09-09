@@ -1,7 +1,7 @@
 import { useContext } from "solid-js"
-import { Tags, TagsProps } from "~/components/map/tags"
-import { Ships, ShipsProps } from "~/components/ships"
-import { DimensionContext } from "~/contexts/Dimension"
+import { Tags, TagsProps } from "@components/BattleMap/Tags"
+import { Ships, ShipsProps } from "@components/Ships"
+import { DimensionContext } from "@contexts/Dimension"
 
 export interface BattleMapProps {
   battleMap: TagsProps["battleMap"]

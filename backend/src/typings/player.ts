@@ -39,7 +39,7 @@ export class BattleMapClass extends Schema {
 
 export type ShipDirection = "horizontal" | "vertical"
 
-export class ShipsClass extends Schema {
+export class ShipClass extends Schema {
   @type("number") x: number
   @type("number") y: number
 
@@ -74,19 +74,15 @@ export class PlayerDataClass extends Schema {
 
   @type([BattleMapClass]) battleMap = new ArraySchema<BattleMapClass>()
 
-  @filter(function (
-    client: Client<Player>,
-    value: ShipsClass[],
-    root: MyState
-  ) {
+  @filter(function (client: Client<Player>, value: ShipClass[], root: MyState) {
     const player = root.players.get(String(client.userData?.id))
 
     if (!player || typeof player.ships === "undefined") return false
 
     return isArrayEqual(player.ships, value)
   })
-  @type([ShipsClass])
-  ships = new ArraySchema<ShipsClass>()
+  @type([ShipClass])
+  ships = new ArraySchema<ShipClass>()
 }
 
 export interface ConnectOptions {

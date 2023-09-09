@@ -1,29 +1,25 @@
-import { ShipsProps } from "~/components/ships"
-import { NotStarted } from "~/components/NotStarted"
-import { DimensionProvider } from "~/contexts/Dimension"
-import { TagsProps } from "~/components/map/tags"
+import { NotStarted } from "@components/NotStarted"
+import { DimensionProvider } from "@contexts/Dimension"
+import { createMemo, Show, useContext } from "solid-js"
+import { GameContext } from "@contexts/Game"
 
 export default function Home() {
-  const battleMap = [
-    { x: 0, y: 0 },
-    { x: 1, y: 1 },
-    { x: 2, y: 2 },
-    { x: 3, y: 3 },
-    { x: 4, y: 4 },
-    { x: 5, y: 5, miss: true },
-    { x: 6, y: 6 },
-    { x: 7, y: 7 },
-    { x: 8, y: 8 },
-    { x: 9, y: 9 }
-  ] as TagsProps["battleMap"]
-  const ships = [
-    { x: 0, y: 0, length: 2, direction: "horizontal" }
-  ] as ShipsProps["ships"]
+  const { game, player } = useContext(GameContext)
+
+  const thisPlayer = createMemo(() => game().players?.get(String(player().id)))
 
   return (
-    <main>
+    <main style={{ "padding-top": "10px" }}>
       <DimensionProvider>
-        <NotStarted battleMap={battleMap} ships={ships} />
+        <Show
+          when={thisPlayer() !== undefined}
+          fallback={<>Undefined thisPlayer</>}
+        >
+          <NotStarted
+            battleMap={thisPlayer()!.battleMap}
+            ships={thisPlayer()!.ships}
+          />
+        </Show>
       </DimensionProvider>
     </main>
   )

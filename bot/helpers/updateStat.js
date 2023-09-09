@@ -72,7 +72,7 @@ module.exports = async (bot) => {
     }
   }
 
-  // console.log(Object.entries(reportsCount).map(([key, value]) => `${key} - ${value}`))
+  // console.log(Object.entries(reportsCount).BattleMap(([key, value]) => `${key} - ${value}`))
 
   await Promise.all([
     ...promises,

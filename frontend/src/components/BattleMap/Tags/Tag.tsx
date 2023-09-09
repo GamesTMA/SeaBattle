@@ -1,5 +1,5 @@
 import { JSX, useContext } from "solid-js"
-import { DimensionContext } from "~/contexts/Dimension"
+import { DimensionContext } from "@contexts/Dimension"
 
 export interface Tag {
   x: number

@@ -1,6 +1,6 @@
 import { MoveContext } from "@actions/onMessage"
 import { MessageInput } from "@typings/socket"
-import { ShipDirection, ShipsClass } from "@typings/player"
+import { ShipClass, ShipDirection } from "@typings/player"
 import { checkCollision } from "@utils/checkCollision"
 import { startGame } from "@helpers/startGame"
 
@@ -26,8 +26,7 @@ export function setShipsRandom({ client, player, room }: MoveContext) {
         Math.random() * (direction === "vertical" ? 10 - shipLength : 10)
       )
 
-      const newShip = new ShipsClass(x, y, shipLength, direction)
-
+      const newShip = new ShipClass(x, y, shipLength, direction)
       if (!checkCollision(newShip, player.ships)) {
         player.ships.push(newShip)
         placed = true

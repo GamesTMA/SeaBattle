@@ -5,7 +5,7 @@ import {
   createSignal,
   ParentProps
 } from "solid-js"
-import { Game } from "~/typings/Game"
+import { Game, Player } from "~/typings/Game"
 import * as Colyseus from "colyseus.js"
 import { Room } from "colyseus.js"
 import { MyState } from "backend/src/typings/game"
@@ -17,16 +17,17 @@ import { serialize } from "~/utils/serialize"
 interface GameProps {
   game: Accessor<Game>
   room: Accessor<Room<MyState>>
+  player: Accessor<Player>
 }
 
-const client = new Colyseus.Client(process.env.NEXT_PUBLIC_WEB_SOCKETS)
-
+const client = new Colyseus.Client(import.meta.env.VITE_WEB_SOCKETS)
 export const GameContext = createContext({} as GameProps)
 
 export function GameProvider(props: ParentProps) {
   const [searchParams, setSearchParams] = useSearchParams()
 
-  const [game, setGame] = createSignal<Game>({} as Game)
+  const [game, setGame] = createSignal({} as Game)
+  const [player, setPlayer] = createSignal({} as Player)
   const [room, setRoom] = createSignal<Room<MyState>>({} as Room<MyState>)
   const [gameId, setGameId] = createSignal(searchParams.tgWebAppStartParam)
 
@@ -41,13 +42,14 @@ export function GameProvider(props: ParentProps) {
     )
       return
 
-    const player = {
+    setPlayer({
       id: inputData.user.id,
       name: inputData.user.firstName,
       language: inputData.user.languageCode
-    }
+    })
+
     const params = {
-      player,
+      player: player(),
       id: gameId()
     }
 
@@ -124,7 +126,7 @@ export function GameProvider(props: ParentProps) {
   })
 
   return (
-    <GameContext.Provider value={{ game, room }}>
+    <GameContext.Provider value={{ game, room, player }}>
       {props.children}
     </GameContext.Provider>
   )

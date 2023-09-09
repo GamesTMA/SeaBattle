@@ -1,5 +1,5 @@
 import { useContext } from "solid-js"
-import { DimensionContext } from "~/contexts/Dimension"
+import { DimensionContext } from "@contexts/Dimension"
 
 export function RandomButton() {
   const { fieldSize, scale } = useContext(DimensionContext)

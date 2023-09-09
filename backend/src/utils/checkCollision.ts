@@ -1,10 +1,10 @@
-import { ShipsClass } from "@typings/player"
+import { ShipClass } from "@typings/player"
 
 type Cell = "empty" | "occupied"
 
 export function checkCollision(
-  newShip: ShipsClass,
-  existingShips: Array<ShipsClass>
+  newShip: ShipClass,
+  existingShips: Array<ShipClass>
 ): boolean {
   const board: Cell[][] = Array.from({ length: 10 }, () =>
     Array<Cell>(10).fill("empty")

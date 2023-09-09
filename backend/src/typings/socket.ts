@@ -1,9 +1,9 @@
 import { GameErrors, GameEvents } from "./game"
-import { ShipsClass } from "@typings/player"
+import { ShipClass } from "@typings/player"
 
 export type MessageInit = {
   type: GameEvents
-  ship: ShipsClass
+  ship: ShipClass
 }
 
 export type MessageInput = {

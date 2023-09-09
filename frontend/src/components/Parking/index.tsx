@@ -1,9 +1,8 @@
 import { createEffect, createSignal, useContext } from "solid-js"
-import { Ships, ShipsProps } from "~/components/ships"
-import { ShipsClass } from "backend/src/typings/player"
-import { Ship } from "~/components/ships/ship"
-import { DimensionContext } from "~/contexts/Dimension"
-import { RandomButton } from "~/components/parking/randomButton"
+import { Ships, ShipsProps } from "@components/Ships"
+import { Ship } from "@components/Ships/Ship"
+import { DimensionContext } from "@contexts/Dimension"
+import { RandomButton } from "@components/Parking/RandomButton"
 
 interface ParkingProps {
   ships: ShipsProps["ships"]
@@ -35,7 +34,7 @@ export function Parking(props: ParkingProps) {
     ships
       .map((element) => {
         const thisTypeShips = props.ships.reduce(
-          (accumulator: number, currentValue: Ship | ShipsClass) =>
+          (accumulator: number, currentValue: Ship) =>
             accumulator + (element[0].length === currentValue.length ? 1 : 0),
           0
         )

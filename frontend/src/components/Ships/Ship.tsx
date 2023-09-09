@@ -1,7 +1,7 @@
-import { ShipsProps } from "~/components/ships/index"
+import { ShipsProps } from "@components/Ships/index"
 import { ShipDirection } from "backend/src/typings/player"
 import { JSX, useContext } from "solid-js"
-import { DimensionContext } from "~/contexts/Dimension"
+import { DimensionContext } from "@contexts/Dimension"
 
 export interface Ship {
   x: number

@@ -3,17 +3,17 @@ import {
   DragDropSensors,
   DragEventHandler
 } from "@thisbeyond/solid-dnd"
-import { BattleMap } from "~/components/map"
-import { Parking } from "~/components/parking"
-import { ShipsProps } from "~/components/ships"
-import { TagsProps } from "~/components/map/tags"
+import { BattleMap } from "@components/BattleMap"
+import { Parking } from "@components/Parking"
+import { ShipsProps } from "@components/Ships"
+import { TagsProps } from "@components/BattleMap/Tags"
 
-export interface DragDropProps {
+export interface NotStartedProps {
   battleMap: TagsProps["battleMap"]
   ships: ShipsProps["ships"]
 }
 
-export function NotStarted(props: DragDropProps) {
+export function NotStarted(props: NotStartedProps) {
   const onDragEnd: DragEventHandler = ({ droppable, draggable }) => {
     console.log(droppable, draggable)
   }

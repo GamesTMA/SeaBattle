@@ -1,7 +1,7 @@
 import { createEffect, createSignal, For, JSX, useContext } from "solid-js"
-import { Ship, ShipComponent } from "~/components/ships/ship"
-import { Draggable } from "~/components/ships/draggable"
-import { DimensionContext } from "~/contexts/Dimension"
+import { Ship, ShipComponent } from "@components/Ships/Ship"
+import { Draggable } from "@components/Ships/Draggable"
+import { DimensionContext } from "@contexts/Dimension"
 
 export interface ShipsProps {
   ships: Ship[]

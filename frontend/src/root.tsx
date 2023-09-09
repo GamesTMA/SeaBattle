@@ -13,8 +13,8 @@ import {
 } from "solid-start"
 import "./root.css"
 import { SDKProvider } from "@twa.js/sdk-solid"
-import { DisplayGate } from "~/contexts/TWA"
-import { GameProvider } from "~/contexts/Game"
+import { DisplayGate } from "@contexts/TWA"
+import { GameProvider } from "@contexts/Game"
 
 export default function Root() {
   return (

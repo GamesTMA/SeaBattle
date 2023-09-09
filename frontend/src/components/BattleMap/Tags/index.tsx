@@ -1,7 +1,7 @@
 import { createEffect, createSignal, For, JSX, useContext } from "solid-js"
-import { Tag } from "~/components/map/tags/tag"
-import { Droppable } from "~/components/map/tags/droppable"
-import { DimensionContext } from "~/contexts/Dimension"
+import { Tag } from "@components/BattleMap/Tags/Tag"
+import { DimensionContext } from "@contexts/Dimension"
+import { Droppable } from "@components/BattleMap/Tags/Droppable"
 
 export interface TagsProps {
   battleMap: Tag[]
