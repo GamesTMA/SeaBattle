@@ -35,7 +35,7 @@ export function Parking(props: ParkingProps) {
       .map((element) => {
         const thisTypeShips = props.ships.reduce(
           (accumulator: number, currentValue: Ship) =>
-            accumulator + (element[0].length === currentValue.length ? 1 : 0),
+            accumulator + (element[0]?.length === currentValue.length ? 1 : 0),
           0
         )
 

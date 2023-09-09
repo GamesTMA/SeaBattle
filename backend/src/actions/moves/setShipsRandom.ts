@@ -12,6 +12,8 @@ export function setShipsRandom({ client, player, room }: MoveContext) {
 
   const shipLengths = [4, 3, 3, 2, 2, 2, 1, 1, 1, 1]
 
+  player.ships.clear()
+
   for (const shipLength of shipLengths) {
     let placed = false
 

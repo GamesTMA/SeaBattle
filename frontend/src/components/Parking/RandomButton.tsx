@@ -1,7 +1,10 @@
 import { useContext } from "solid-js"
 import { DimensionContext } from "@contexts/Dimension"
+import { MessageInit } from "backend/src/typings/socket"
+import { GameContext } from "@contexts/Game"
 
 export function RandomButton() {
+  const { room } = useContext(GameContext)
   const { fieldSize, scale } = useContext(DimensionContext)
 
   return (
@@ -23,6 +26,11 @@ export function RandomButton() {
         "font-weight": 700,
         color: "#2e08ff"
       }}
+      onClick={() =>
+        room().send("game", {
+          type: "setShipsRandom"
+        } as MessageInit)
+      }
     >
       Text
     </div>

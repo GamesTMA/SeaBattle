@@ -2,6 +2,8 @@ import { createEffect, createSignal, For, JSX, useContext } from "solid-js"
 import { Ship, ShipComponent } from "@components/Ships/Ship"
 import { Draggable } from "@components/Ships/Draggable"
 import { DimensionContext } from "@contexts/Dimension"
+import { MessageInit } from "backend/src/typings/socket"
+import { GameContext } from "@contexts/Game"
 
 export interface ShipsProps {
   ships: Ship[]
@@ -9,6 +11,7 @@ export interface ShipsProps {
 }
 
 export function Ships(props: ShipsProps) {
+  const { room } = useContext(GameContext)
   const { fieldSize } = useContext(DimensionContext)
   const [ships, setShips] = createSignal([] as ShipsProps["ships"])
 
@@ -47,11 +50,19 @@ export function Ships(props: ShipsProps) {
             : 297
 
         return props.draggable ? (
-          <Draggable id={`${item.x}x${item.y}`} style={item.style}>
+          <Draggable data={item} style={item.style}>
             <ShipComponent item={item} ships={props} shift={shift} />
           </Draggable>
         ) : (
-          <div style={item.style}>
+          <div
+            style={item.style}
+            onClick={() =>
+              room().send("game", {
+                type: "deleteShip",
+                ship: item
+              } as MessageInit)
+            }
+          >
             <ShipComponent item={item} ships={props} shift={shift} />
           </div>
         )

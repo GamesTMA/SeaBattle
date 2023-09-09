@@ -34,7 +34,11 @@ export function Tags(props: TagsProps) {
     <For each={battleMap()}>
       {(item) => {
         return props.droppable ? (
-          <Droppable id={`${item.x}x${item.y}`} style={item.style}>
+          <Droppable
+            id={`${item.x}x${item.y}`}
+            data={{ x: item.x, y: item.y }}
+            style={item.style}
+          >
             <Tag item={item} />
           </Droppable>
         ) : (

@@ -2,6 +2,7 @@ import { MoveContext } from "@actions/onMessage"
 import { MessageInput } from "@typings/socket"
 import { startGame } from "@helpers/startGame"
 import { checkCollision } from "@utils/checkCollision"
+import { ShipClass } from "@typings/player"
 
 export function setShip({
   client,
@@ -34,7 +35,6 @@ export function setShip({
       type: "collisionMatched"
     } as MessageInput)
 
-  player.ships.push(ship)
-
+  player.ships.push(new ShipClass(ship.x, ship.y, ship.length, ship.direction))
   return startGame(room)
 }

@@ -3,13 +3,13 @@ import { JSX, JSXElement } from "solid-js"
 
 interface DraggableProps {
   id: string
+  data: object
   children: JSXElement
   style?: JSX.CSSProperties
 }
 
 export function Droppable(props: DraggableProps) {
-  const droppable = createDroppable(props.id)
-
+  const droppable = createDroppable(props.id, props.data)
   return (
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     // @ts-ignore

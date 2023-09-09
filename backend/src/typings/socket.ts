@@ -3,7 +3,7 @@ import { ShipClass } from "@typings/player"
 
 export type MessageInit = {
   type: GameEvents
-  ship: ShipClass
+  ship?: ShipClass
 }
 
 export type MessageInput = {
