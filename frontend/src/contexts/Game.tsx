@@ -40,7 +40,7 @@ export function GameProvider(props: ParentProps) {
       inputData === undefined ||
       inputData.user === null
     )
-      return
+      return console.error("no Data")
 
     setPlayer({
       id: inputData.user.id,
@@ -53,39 +53,31 @@ export function GameProvider(props: ParentProps) {
       id: gameId()
     }
 
-    const maxAttempts = 15
     const delay = 1000
-    const tryConnect = async (): Promise<Room<MyState> | null> => {
-      let attempts = 0
-
-      while (attempts < maxAttempts) {
+    const tryConnect = async (): Promise<Room<MyState>> => {
+      // eslint-disable-next-line no-constant-condition
+      while (true) {
         try {
-          if (gameId === null) {
+          if (gameId() === null)
             return await client.joinOrCreate<MyState>("game", params)
-          } else {
+          else {
             try {
               return await client.joinById<MyState>(gameId(), params)
             } catch (e) {
+              console.error(e, gameId, "inner try")
+
               return await client.create<MyState>("game", params)
             }
           }
         } catch (e) {
-          console.error(e, gameId)
-          attempts++
-
-          if (attempts >= maxAttempts) return null
-
+          console.error(e, gameId, "try")
           await new Promise((resolve) => setTimeout(resolve, delay))
         }
       }
-
-      return null
     }
 
     const connectToGame = async () => {
       const connect = await tryConnect()
-
-      if (connect === null) return
 
       const updateState = (state: MyState) => {
         const gameState = state.toJSON() as unknown as Game
@@ -98,9 +90,7 @@ export function GameProvider(props: ParentProps) {
 
       connect.onMessage("game", onMessage)
       connect.onStateChange((state) => updateState(state))
-      connect.onError((code, message) => {
-        console.log(code, message, "onError")
-      })
+      connect.onError((code, message) => console.log(code, message, "onError"))
       connect.onLeave(async (code) => {
         console.log(code, "onLeave")
 
@@ -118,6 +108,12 @@ export function GameProvider(props: ParentProps) {
   }
 
   createEffect(() => {
+    console.log(
+      searchParams.tgWebAppStartParam,
+      gameId(),
+      room().connection?.isOpen,
+      searchParams.tgWebAppStartParam !== gameId() || !room().connection?.isOpen
+    )
     if (
       searchParams.tgWebAppStartParam !== gameId() ||
       !room().connection?.isOpen

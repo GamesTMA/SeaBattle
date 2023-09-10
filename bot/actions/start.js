@@ -5,9 +5,11 @@ module.exports = async (ctx) => {
   await showView(ctx)
 
   return ctx.replyWithHTML(
-    ctx.i18n.t('"start.text",
-    Markup.inlineKeyboard([
-      Markup.webAppButton(ctx.i18n.t('"webApp", { url: process.env.DOMAIN })
-    ]).extra()
+    ctx.i18n.t(
+      'start.text',
+      Markup.inlineKeyboard([
+        Markup.webAppButton(ctx.i18n.t('webApp', { url: process.env.DOMAIN }))
+      ]).extra()
+    )
   )
-;}
+}

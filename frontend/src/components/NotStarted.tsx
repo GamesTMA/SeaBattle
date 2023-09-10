@@ -6,7 +6,7 @@ import {
 import { BattleMap } from "@components/BattleMap"
 import { Parking } from "@components/Parking"
 import { ShipsProps } from "@components/Ships"
-import { TagsProps } from "@components/BattleMap/Tags"
+import { TagsProps } from "@components/Tags"
 import { useContext } from "solid-js"
 import { GameContext } from "@contexts/Game"
 import { MessageInit } from "backend/src/typings/socket"
@@ -38,6 +38,7 @@ export function NotStarted(props: NotStartedProps) {
         battleMap={props.battleMap}
         ships={props.ships}
         droppable={true}
+        attackable={false}
       />
       <Parking ships={props.ships} />
     </DragDropProvider>
