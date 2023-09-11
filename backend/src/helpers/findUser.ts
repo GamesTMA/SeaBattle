@@ -1,5 +1,5 @@
-import { IUser, User } from "@database/user"
+import { User } from "@database/user"
 
-export async function findUser(id: IUser["id"]) {
+export async function findUser(id: number) {
   return User.findOne({ id })
 }
