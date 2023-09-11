@@ -36,5 +36,6 @@ export function setShip({
     } as MessageInput)
 
   player.ships.push(new ShipClass(ship.x, ship.y, ship.length, ship.direction))
+
   return startGame(room)
 }

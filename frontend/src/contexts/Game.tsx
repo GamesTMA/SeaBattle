@@ -58,7 +58,7 @@ export function GameProvider(props: ParentProps) {
       // eslint-disable-next-line no-constant-condition
       while (true) {
         try {
-          if (gameId() === null)
+          if (gameId() === null || gameId() === undefined)
             return await client.joinOrCreate<MyState>("game", params)
           else {
             try {

@@ -8,8 +8,25 @@ import { Started } from "@components/Started"
 export default function Home() {
   const { game, player } = useContext(GameContext)
 
-  const thisPlayer = createMemo(() => game().players?.get(String(player().id)))
-  const opponent = createMemo(() => game().players?.get(String(player().id)))
+  const thisPlayer = createMemo(() => {
+    if (!game().players?.size) return undefined
+
+    return game().players.get(String(player().id))
+  })
+  const opponent = createMemo(() => {
+    const gameData = game()
+
+    if (gameData && gameData.players?.size && String(player()?.id)) {
+      const opponentId = [...gameData.players.keys()].find(
+        (key) => key !== String(player().id)
+      )
+
+      if (opponentId) return gameData.players.get(opponentId)
+    }
+
+    return undefined
+  })
+
   return (
     <main style={{ "padding-top": "10px" }}>
       <DimensionProvider>

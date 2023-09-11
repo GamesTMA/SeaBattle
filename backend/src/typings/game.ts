@@ -18,7 +18,8 @@ export const gameErrorsArray = [
   "notYourMove",
   "notAllowed",
   "thisTypeOverloaded",
-  "collisionMatched"
+  "collisionMatched",
+  "alreadyPointed"
 ] as const
 export type GameErrors = (typeof gameErrorsArray)[number]
 

@@ -1,7 +1,6 @@
-import { ArraySchema, filter, Schema, type } from "@colyseus/schema"
+import { ArraySchema, filterChildren, Schema, type } from "@colyseus/schema"
 import { Client } from "colyseus"
 import { MyState } from "@typings/game"
-import { isArrayEqual } from "@utils/isArrayEqual"
 
 export type PlayerStatus = "online" | "offline" | "afk"
 
@@ -72,14 +71,20 @@ export class PlayerDataClass extends Schema {
 
   @type("string") status: PlayerStatus
 
+  @type("number") winAmount?: number
   @type([BattleMapClass]) battleMap = new ArraySchema<BattleMapClass>()
 
-  @filter(function (client: Client<Player>, value: ShipClass[], root: MyState) {
+  @filterChildren(function (
+    this: PlayerDataClass,
+    client: Client<Player>,
+    value: ShipClass,
+    root: MyState
+  ) {
     const player = root.players.get(String(client.userData?.id))
 
     if (!player || typeof player.ships === "undefined") return false
 
-    return isArrayEqual(player.ships, value)
+    return value.sunk || player.info.id === this.info.id
   })
   @type([ShipClass])
   ships = new ArraySchema<ShipClass>()

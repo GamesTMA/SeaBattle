@@ -22,7 +22,7 @@ export function RandomButton() {
         display: "flex",
         "align-items": "center",
         "justify-content": "center",
-        "font-size": `${scale() * 16}px`,
+        "font-size": `${scale() * 17}px`,
         "font-weight": 700,
         color: "#2e08ff"
       }}
@@ -32,7 +32,7 @@ export function RandomButton() {
         } as MessageInit)
       }
     >
-      Text
+      Random
     </div>
   )
 }

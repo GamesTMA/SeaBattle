@@ -26,8 +26,13 @@ export function Ships(props: ShipsProps) {
             position: "absolute",
             left: `${(item.x + 1) * fieldSize()}px`,
             top: `${(item.y + 1) * fieldSize()}px`,
-            transform: item.direction === "vertical" ? `rotate(-90deg)` : ""
-            // "transform-origin": "bottom left"
+            transform:
+              item.direction === "vertical"
+                ? `rotate(-90deg) translate(-${
+                    fieldSize() * item.length - 1
+                  }px, 0px)`
+                : "",
+            "transform-origin": "top left"
           } as JSX.CSSProperties
         }))
       )
