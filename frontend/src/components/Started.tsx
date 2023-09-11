@@ -13,7 +13,7 @@ export function Started(props: NotStartedProps) {
         battleMap={props.opponent.battleMap}
         ships={props.opponent.ships}
         droppable={false}
-        attackable={true}
+        attackable
       />
       <BattleMap
         battleMap={props.thisPlayer.battleMap}

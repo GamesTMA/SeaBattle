@@ -1,6 +1,6 @@
 import { PlayerStatus } from "backend/src/typings/player"
 import { GameStatus, GameType } from "backend/src/typings/game"
-import { Tag } from "@components/BattleMap/Tags/Tag"
+import { Field } from "@components/Fields/Field"
 import { Ship } from "@components/Ships/Ship"
 
 export interface Player {
@@ -12,7 +12,7 @@ export interface Player {
 export interface PlayerData {
   info: Player
   status: PlayerStatus
-  battleMap: Tag[]
+  battleMap: Field[]
   ships: Ship[]
 }
 

@@ -4,7 +4,7 @@ import { BattleMapClass, ShipClass } from "@typings/player"
 export type MessageInit = {
   type: GameEvents
   ship?: ShipClass
-  tag?: BattleMapClass
+  field?: BattleMapClass
 }
 
 export type MessageInput = {

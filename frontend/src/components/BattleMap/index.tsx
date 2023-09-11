@@ -1,10 +1,10 @@
 import { useContext } from "solid-js"
-import { Tags, TagsProps } from "@components/Tags"
+import { Fields, FieldsProps } from "src/components/Fields"
 import { Ships, ShipsProps } from "@components/Ships"
 import { DimensionContext } from "@contexts/Dimension"
 
 export interface BattleMapProps {
-  battleMap: TagsProps["battleMap"]
+  battleMap: FieldsProps["battleMap"]
   ships: ShipsProps["ships"]
   droppable: boolean
   attackable: boolean
@@ -44,12 +44,16 @@ export function BattleMap(props: BattleMapProps) {
           "background-repeat": "no-repeat"
         }}
       />
-      <Tags
+      <Fields
         battleMap={props.battleMap}
         droppable={props.droppable}
         attackable={props.attackable}
       />
-      <Ships ships={props.ships} draggable={false} />
+      <Ships
+        ships={props.ships}
+        draggable={false}
+        droppable={props.droppable}
+      />
     </figure>
   )
 }

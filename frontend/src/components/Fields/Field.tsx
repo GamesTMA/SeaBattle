@@ -1,7 +1,7 @@
 import { JSX, useContext } from "solid-js"
 import { DimensionContext } from "@contexts/Dimension"
 
-export interface Tag {
+export interface Field {
   x: number
   y: number
   hit?: boolean
@@ -10,11 +10,11 @@ export interface Tag {
   style?: JSX.CSSProperties
 }
 
-export interface TagProps {
-  item: Tag
+export interface FieldProps {
+  item: Field
 }
 
-export function Tag(props: TagProps) {
+export function Field(props: FieldProps) {
   const { scale } = useContext(DimensionContext)
 
   return (

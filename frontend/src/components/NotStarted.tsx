@@ -6,14 +6,14 @@ import {
 import { BattleMap } from "@components/BattleMap"
 import { Parking } from "@components/Parking"
 import { ShipsProps } from "@components/Ships"
-import { TagsProps } from "@components/Tags"
+import { FieldsProps } from "src/components/Fields"
 import { useContext } from "solid-js"
 import { GameContext } from "@contexts/Game"
 import { MessageInit } from "backend/src/typings/socket"
 import { Ship } from "@components/Ships/Ship"
 
 export interface NotStartedProps {
-  battleMap: TagsProps["battleMap"]
+  battleMap: FieldsProps["battleMap"]
   ships: ShipsProps["ships"]
 }
 
@@ -37,7 +37,7 @@ export function NotStarted(props: NotStartedProps) {
       <BattleMap
         battleMap={props.battleMap}
         ships={props.ships}
-        droppable={true}
+        droppable
         attackable={false}
       />
       <Parking ships={props.ships} />

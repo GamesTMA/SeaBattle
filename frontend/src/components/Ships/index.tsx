@@ -8,6 +8,7 @@ import { GameContext } from "@contexts/Game"
 export interface ShipsProps {
   ships: Ship[]
   draggable: boolean
+  droppable: boolean
 }
 
 export function Ships(props: ShipsProps) {
@@ -56,7 +57,7 @@ export function Ships(props: ShipsProps) {
           <Draggable data={item} style={item.style}>
             <ShipComponent item={item} ships={props} shift={shift} />
           </Draggable>
-        ) : (
+        ) : props.droppable ? (
           <div
             style={item.style}
             onClick={() =>
@@ -66,6 +67,10 @@ export function Ships(props: ShipsProps) {
               } as MessageInit)
             }
           >
+            <ShipComponent item={item} ships={props} shift={shift} />
+          </div>
+        ) : (
+          <div style={item.style}>
             <ShipComponent item={item} ships={props} shift={shift} />
           </div>
         )

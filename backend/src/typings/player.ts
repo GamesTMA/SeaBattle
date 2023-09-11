@@ -77,6 +77,7 @@ export class PlayerDataClass extends Schema {
   @filterChildren(function (
     this: PlayerDataClass,
     client: Client<Player>,
+    key: string,
     value: ShipClass,
     root: MyState
   ) {

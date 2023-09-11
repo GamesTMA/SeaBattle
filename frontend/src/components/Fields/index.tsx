@@ -1,20 +1,20 @@
 import { createEffect, createSignal, For, JSX, useContext } from "solid-js"
-import { Tag } from "@components/Tags/Tag"
+import { Field } from "@components/Fields/Field"
 import { DimensionContext } from "@contexts/Dimension"
-import { Droppable } from "@components/Tags/Droppable"
+import { Droppable } from "@components/Fields/Droppable"
 import { MessageInit } from "backend/src/typings/socket"
 import { GameContext } from "@contexts/Game"
 
-export interface TagsProps {
-  battleMap: Tag[]
+export interface FieldsProps {
+  battleMap: Field[]
   droppable: boolean
   attackable: boolean
 }
 
-export function Tags(props: TagsProps) {
+export function Fields(props: FieldsProps) {
   const { room } = useContext(GameContext)
   const { fieldSize } = useContext(DimensionContext)
-  const [battleMap, setBattleMap] = createSignal([] as TagsProps["battleMap"])
+  const [battleMap, setBattleMap] = createSignal([] as FieldsProps["battleMap"])
 
   createEffect(() => {
     if (fieldSize())
@@ -43,7 +43,7 @@ export function Tags(props: TagsProps) {
             data={{ x: item.x, y: item.y }}
             style={item.style}
           >
-            <Tag item={item} />
+            <Field item={item} />
           </Droppable>
         ) : props.attackable ? (
           <div
@@ -51,15 +51,15 @@ export function Tags(props: TagsProps) {
             onClick={() =>
               room().send("game", {
                 type: "makeFire",
-                tag: item
+                field: item
               } as MessageInit)
             }
           >
-            <Tag item={item} />
+            <Field item={item} />
           </div>
         ) : (
           <div style={item.style}>
-            <Tag item={item} />
+            <Field item={item} />
           </div>
         )
       }}

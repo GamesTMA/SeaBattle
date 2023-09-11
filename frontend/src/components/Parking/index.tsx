@@ -60,7 +60,7 @@ export function Parking(props: ParkingProps) {
       }}
     >
       <RandomButton />
-      <Ships ships={parkedShips()} draggable />
+      <Ships ships={parkedShips()} draggable droppable />
     </figure>
   )
 }
