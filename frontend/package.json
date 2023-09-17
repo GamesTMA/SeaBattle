@@ -10,7 +10,7 @@
     "@typescript-eslint/eslint-plugin": "latest",
     "@typescript-eslint/parser": "latest",
     "autoprefixer": "^10.4.15",
-    "eslint": "^8.48.0",
+    "eslint": "^8.49.0",
     "eslint-plugin-solid": "^0.13.0",
     "postcss": "^8.4.29",
     "solid-start-node": "^0.3.5",
@@ -22,11 +22,11 @@
     "@solidjs/meta": "^0.28.6",
     "@solidjs/router": "^0.8.3",
     "@thisbeyond/solid-dnd": "^0.7.4",
-    "@twa.js/sdk-solid": "^0.0.8",
+    "@twa.js/sdk-solid": "^0.1.1",
     "colyseus.js": "^0.15.13",
     "solid-js": "^1.7.11",
     "solid-start": "^0.3.5",
-    "vite-tsconfig-paths": "^4.2.0"
+    "vite-tsconfig-paths": "^4.2.1"
   },
   "engines": {
     "node": "18"

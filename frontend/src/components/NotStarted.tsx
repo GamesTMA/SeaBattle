@@ -39,6 +39,7 @@ export function NotStarted(props: NotStartedProps) {
         ships={props.ships}
         droppable
         attackable={false}
+        your={false}
       />
       <Parking ships={props.ships} />
     </DragDropProvider>

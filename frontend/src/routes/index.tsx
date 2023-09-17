@@ -4,10 +4,11 @@ import { createMemo, Show, useContext } from "solid-js"
 import { GameContext } from "@contexts/Game"
 import Loading from "@components/Loading"
 import { Started } from "@components/Started"
+import { useSDK } from "@twa.js/sdk-solid"
 
 export default function Home() {
   const { game, player } = useContext(GameContext)
-
+  const { themeParams } = useSDK()
   const thisPlayer = createMemo(() => {
     if (!game().players?.size) return undefined
 
@@ -28,7 +29,12 @@ export default function Home() {
   })
 
   return (
-    <main style={{ "padding-top": "10px" }}>
+    <main
+      style={{
+        "padding-top": "10px",
+        background: themeParams().isDark ? "#000" : "#fff"
+      }}
+    >
       <DimensionProvider>
         <Show when={thisPlayer() !== undefined} fallback={<Loading />}>
           {game().status === "playing" ? (

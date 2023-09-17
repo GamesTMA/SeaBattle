@@ -5,6 +5,7 @@ import { connect } from "mongoose"
 import { Server } from "@colyseus/core"
 import { uWebSocketsTransport } from "@colyseus/uwebsockets-transport"
 import { RedisDriver } from "colyseus"
+import { RedisPresence } from "@colyseus/redis-presence"
 
 import { MyRoom } from "@typings/room"
 import { getUserInfo } from "@actions/getUserInfo"
@@ -22,9 +23,16 @@ const gameServer = new Server({
     password: config.REDIS_PASS,
     port: config.REDIS_PORT
   }),
+  presence: new RedisPresence({
+    host: config.REDIS_HOST,
+    password: config.REDIS_PASS,
+    port: config.REDIS_PORT
+  }),
   transport: transport
 })
 
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-ignore
 gameServer.define("game", MyRoom)
 
 process.on("unhandledRejection", (e) =>

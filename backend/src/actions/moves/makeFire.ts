@@ -4,7 +4,12 @@ import { isOccupied } from "@utils/isOccupied"
 import { getNeighbors } from "@utils/getNeighbors"
 import { checkShip } from "@utils/checkShip"
 
-export function makeFire({ client, message: { field }, player, room }: MoveContext) {
+export function makeFire({
+  client,
+  message: { field },
+  player,
+  room
+}: MoveContext) {
   if (room.state.status !== "playing")
     return client.send("game", {
       type: "notStarted"
@@ -18,32 +23,30 @@ export function makeFire({ client, message: { field }, player, room }: MoveConte
   const opponent = room.state.players.get(
     [...room.state.players.keys()].find((key) => key !== String(player.info.id))
   )
-  const firedField = opponent.ba;ttleMap.find(
+  const firedField = opponent.battleMap.find(
     (element) => element.x === field.x && element.y === field.y
   )
 
-  if (firedField.hit || firedFi;eld.miss || firedField.marked)
+  if (firedField.hit || firedField.miss || firedField.marked)
     return client.send("game", {
       type: "alreadyPointed"
     } as MessageInput)
 
-  const hitted = isOccupied(field.x, field.y, opponent.ships);
+  const hitted = isOccupied(field.x, field.y, opponent.ships)
   if (hitted) {
-    firedField.hit = true;
-
+    firedField.hit = true
     if (checkShip(hitted, opponent.battleMap) === hitted.length) {
-      hitted.sunk = true;
-
-      getNeighbors(hitted, opponent.battleMap).forEach((neighbor) => {
+      hitted.sunk = true
+      getNeighbors(hitted).forEach((neighbor) => {
         const firedField = opponent.battleMap.find(
           (element) => element.x === neighbor.x && element.y === neighbor.y
-        );
+        )
 
-        if (firedField) firedField.marked = true;
-      });
+        if (firedField) firedField.marked = true
+      })
     }
   } else {
-    firedField.miss = true;
+    firedField.miss = true
     room.state.currentPlayer = opponent.info.id
   }
 }

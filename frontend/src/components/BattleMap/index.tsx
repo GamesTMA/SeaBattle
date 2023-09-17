@@ -1,13 +1,15 @@
-import { useContext } from "solid-js"
+import { Show, useContext } from "solid-js"
 import { Fields, FieldsProps } from "src/components/Fields"
 import { Ships, ShipsProps } from "@components/Ships"
 import { DimensionContext } from "@contexts/Dimension"
+import { YourMap } from "@components/BattleMap/YourMap"
 
 export interface BattleMapProps {
   battleMap: FieldsProps["battleMap"]
   ships: ShipsProps["ships"]
   droppable: boolean
   attackable: boolean
+  your: boolean
 }
 
 export function BattleMap(props: BattleMapProps) {
@@ -23,6 +25,9 @@ export function BattleMap(props: BattleMapProps) {
         "margin-right": "auto"
       }}
     >
+      <Show when={props.your}>
+        <YourMap />
+      </Show>
       <div
         style={{
           "background-image": `url('/grid.png')`,

@@ -102,6 +102,17 @@ export function GameProvider(props: ParentProps) {
       updateState(connect.state)
 
       setSearchParams({ tgWebAppStartParam: gameId() })
+
+      console.log(
+        "afterConnection",
+        `gameId: ${gameId()}`,
+        `roomId: ${room().roomId}`,
+        `isOpen: ${room().connection?.isOpen}`,
+        `connectToGame: ${
+          room().roomId !== gameId() || !room().connection?.isOpen
+        }`,
+        `startParams: ${searchParams.tgWebAppStartParam}`
+      )
     }
 
     await connectToGame()
@@ -109,10 +120,14 @@ export function GameProvider(props: ParentProps) {
 
   createEffect(() => {
     console.log(
-      searchParams.tgWebAppStartParam,
-      gameId(),
-      room().connection?.isOpen,
-      searchParams.tgWebAppStartParam !== gameId() || !room().connection?.isOpen
+      "beforeConnection",
+      `gameId: ${gameId()}`,
+      `roomId: ${room().roomId}`,
+      `isOpen: ${room().connection?.isOpen}`,
+      `connectToGame: ${
+        room().roomId !== gameId() || !room().connection?.isOpen
+      }`,
+      `startParams: ${searchParams.tgWebAppStartParam}`
     )
     if (
       searchParams.tgWebAppStartParam !== gameId() ||

@@ -24,7 +24,7 @@ export function RandomButton() {
         "justify-content": "center",
         "font-size": `${scale() * 17}px`,
         "font-weight": 700,
-        color: "#2e08ff"
+        color: "var(--tg-theme-text-color)"
       }}
       onClick={() =>
         room().send("game", {
@@ -32,7 +32,7 @@ export function RandomButton() {
         } as MessageInit)
       }
     >
-      Random
+      Случайно
     </div>
   )
 }
